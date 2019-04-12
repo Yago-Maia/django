@@ -9,8 +9,9 @@ E criar o ambiente virtual
 	git clone 'url do git'
 	git clone -b 'nome_branch' 'url'
 	cd 'nome do projeto'
-	virtualenv ENV (se for python 2.7, especificar a versão)
+	virtualenv ENV (se for python 2.7, especificar a versï¿½o)
 	virtualenv -p python2.7 ENV
+   virtualenv -p python3.6 ENV
 
 Ativar ambiente ENV
 	ENV\Scripts\activate (Windows)
@@ -23,24 +24,24 @@ Desativar ambiente ENV
 	ENV\Scripts\deactivate (Windows)
 	source ENV\bin\deactivate (Linux)
 	
-Trocar usuário
+Trocar usuï¿½rio
 	vi server-conf/'nome do projeto'.ini
-	Trocar usuário suporte por python
+	Trocar usuï¿½rio suporte por python
 	
-Após mudar variáveis de ambiente em:
+Apï¿½s mudar variï¿½veis de ambiente em:
 	uwsgi/default.ini
 Restartar o sistema
 	sudo service uwsgi restart
 	
-Verificar log ao rodar código no servidor linux
+Verificar log ao rodar cï¿½digo no servidor linux
 sudo less var/log/uwsgi/'nome do projeto'
 shift + g
 ---------------------------------------------------------------------------------------------------------------------
-DICIONÁRIO E LISTA
+DICIONï¿½RIO E LISTA
 
 var = {'nome':'Yago', 'segundo_nome':'Maia'}
-var.get('idade', 'Idade não informada')
-	'Idade não informada'
+var.get('idade', 'Idade nï¿½o informada')
+	'Idade nï¿½o informada'
 
 def imprime_nome(nome, segundo_nome):
 	print(nome + ' ' + segundo_nome)
@@ -59,11 +60,11 @@ def imprime_nome4(nome, sobrenome, repeticoes=1):
 		print(nome+' '+sobrenome)	
 
 def imprime_nome5(nome, sobrenome, idade=None, repeticoes=1):
-	desc_idade = idade if idade is not None else 'Idade não informada'
+	desc_idade = idade if idade is not None else 'Idade nï¿½o informada'
 	for repeticao in range(repeticoes):
 		print('{nome} {sobrenome}, {idade}'.format(nome=nome, sobrenome=sobrenome, idade=desc_idade))
 ---------------------------------------------------------------------------------------------------------------------
-REPLACE MÚLTIPLAS STRINGS
+REPLACE Mï¿½LTIPLAS STRINGS
 
 import re
 
@@ -219,7 +220,7 @@ Assinatura - GSMarcos
 
 http://smatende.gsmarcos.com.br/smassinatura/
 ---------------------------------------------------------------------------------------------------------------------
-Conexão ODBC Python - Windows
+Conexï¿½o ODBC Python - Windows
 
 import pyodbc
 
@@ -232,7 +233,7 @@ l = cur.execute('SELECT RTL.ResultadoParametro FROM ResultadoLocal RTL WHERE RTL
 Link doc PYODBC
 https://github.com/mkleehammer/pyodbc/wiki/Getting-started
 ---------------------------------------------------------------------------------------------------------------------
-Conexão ODBC Python - Linux
+Conexï¿½o ODBC Python - Linux
 
 import turbodbc
 
@@ -258,9 +259,9 @@ Comandos GIT
 Cancelar commit
 git reset HEAD~1
 ---------------------------------------------------------------------------------------------------------------------
-Endereços API's Python
+Endereï¿½os API's Python
 
-API's Produção:
+API's Produï¿½ï¿½o:
 	Externo:
 		186.248.152.162
 		http://smconecta.saomarcoslaboratorio.com.br:8083
@@ -268,7 +269,7 @@ API's Produção:
 	Interno:
 		192.168.100.218
 
-API's Homologação:
+API's Homologaï¿½ï¿½o:
 	Externo:
 		186.248.152.165
 		http://smconectahomol.gsmarcos.com.br:8084
@@ -278,30 +279,30 @@ API's Homologação:
 
 ---------------------------------------------------------------------------------------------------------------------
 Django
-Variáveis:
+Variï¿½veis:
 	{{ meu_dicionario.chave }}
 	{{ meu_objeto.atributo }}
 	{{ meu_objeto.metodo }}
 	{{ minha_list.0 }}
 
 Tags:
-	{%tag%} Conteúdo {%endtag%}
-	{%tag param1 param2%} Conteúdo {%endtag%}
+	{%tag%} Conteï¿½do {%endtag%}
+	{%tag param1 param2%} Conteï¿½do {%endtag%}
 	{%tag param1 param2%}
 
 Filtros:
 	{{ variavel|lower }}
-	{{ varial|default:"padrão" }}
+	{{ varial|default:"padrï¿½o" }}
 	{{ variavel|random|lower }}
 	
-Para incluir a aplicação no projeto, é necessário adicionar a referência à classe de configuração da 
-aplicação na definição do installed_apps. 
+Para incluir a aplicaï¿½ï¿½o no projeto, ï¿½ necessï¿½rio adicionar a referï¿½ncia ï¿½ classe de configuraï¿½ï¿½o da 
+aplicaï¿½ï¿½o na definiï¿½ï¿½o do installed_apps. 
 
-Após isso é necessário rodar o comando - manage.py makemigrations polls
+Apï¿½s isso ï¿½ necessï¿½rio rodar o comando - manage.py makemigrations polls
 
-Esse comando indica que você fez algumas mudanças em seus modelos e que você gostaria que as alterações 
-sejam armezenadas como uma migração.
-As migrações são como o django armazena as alterações nos seus modelos
+Esse comando indica que vocï¿½ fez algumas mudanï¿½as em seus modelos e que vocï¿½ gostaria que as alteraï¿½ï¿½es 
+sejam armezenadas como uma migraï¿½ï¿½o.
+As migraï¿½ï¿½es sï¿½o como o django armazena as alteraï¿½ï¿½es nos seus modelos
 
 manage.py sqlmigrate polls 0001
 
