@@ -35,12 +35,11 @@
             "name": "Python: Django",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/manage.py",
+            "program": "${workspaceFolder}/simplemoc/manage.py",
             "console": "integratedTerminal",
             "args": [
                 "runserver",
                 "--noreload",
-                "--nothreading"
             ],
             "django": true
         },

@@ -15,6 +15,7 @@ class Course(models.Model):
     name = models.CharField('Nome', max_length=100)
     slug = models.SlugField('Atalho')
     description = models.TextField('Descrição', blank=True)
+    about = models.TextField('Sobre o curso', blank=True)
     start_date = models.DateField('Data de início', null=True, blank=True)
     image = models.ImageField(
         upload_to='courses/images', verbose_name='Imagem',
@@ -28,6 +29,9 @@ class Course(models.Model):
 
     def __str__(self):
         return self.name 
+
+    def get_absolute_url(self):
+        return (self.slug)
     
     class Meta:
         verbose_name = 'Curso'
