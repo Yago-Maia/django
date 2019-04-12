@@ -261,7 +261,7 @@ git reset HEAD~1
 ---------------------------------------------------------------------------------------------------------------------
 Endere�os API's Python
 
-API's Produ��o:
+API's Produção:
 	Externo:
 		186.248.152.162
 		http://smconecta.saomarcoslaboratorio.com.br:8083
