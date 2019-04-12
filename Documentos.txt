@@ -1,0 +1,315 @@
+---------------------------------------------------------------------------------------------------------------------
+CLONAR PROJETO - GIT
+
+Entrar no Workspace em Documents
+	cd Documents\Workspace\
+	
+	rm integra/ -rf
+E criar o ambiente virtual
+	git clone 'url do git'
+	git clone -b 'nome_branch' 'url'
+	cd 'nome do projeto'
+	virtualenv ENV (se for python 2.7, especificar a versão)
+	virtualenv -p python2.7 ENV
+
+Ativar ambiente ENV
+	ENV\Scripts\activate (Windows)
+	source ENV\bin\activate (Linux)
+
+Instalar os requerimentos do ambiente pelo pip
+	pip install -r requirements.txt
+	
+Desativar ambiente ENV
+	ENV\Scripts\deactivate (Windows)
+	source ENV\bin\deactivate (Linux)
+	
+Trocar usuário
+	vi server-conf/'nome do projeto'.ini
+	Trocar usuário suporte por python
+	
+Após mudar variáveis de ambiente em:
+	uwsgi/default.ini
+Restartar o sistema
+	sudo service uwsgi restart
+	
+Verificar log ao rodar código no servidor linux
+sudo less var/log/uwsgi/'nome do projeto'
+shift + g
+---------------------------------------------------------------------------------------------------------------------
+DICIONÁRIO E LISTA
+
+var = {'nome':'Yago', 'segundo_nome':'Maia'}
+var.get('idade', 'Idade não informada')
+	'Idade não informada'
+
+def imprime_nome(nome, segundo_nome):
+	print(nome + ' ' + segundo_nome)
+
+imprime_nome(**var)
+	Yago Maia
+imprime_nome(*var)
+	nome segundo_nome
+
+lista = ['yago', 'maia']
+imprime_nome(*lista)
+	yago maia
+
+def imprime_nome4(nome, sobrenome, repeticoes=1):
+	for repeticao in range(repeticoes):
+		print(nome+' '+sobrenome)	
+
+def imprime_nome5(nome, sobrenome, idade=None, repeticoes=1):
+	desc_idade = idade if idade is not None else 'Idade não informada'
+	for repeticao in range(repeticoes):
+		print('{nome} {sobrenome}, {idade}'.format(nome=nome, sobrenome=sobrenome, idade=desc_idade))
+---------------------------------------------------------------------------------------------------------------------
+REPLACE MÚLTIPLAS STRINGS
+
+import re
+
+def replace_mult_strings(texto):
+	dic_replace = {
+        "{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0 Times New Roman;}}{\\pard": "",
+        "\\par}}": "",
+        "\\line": "\n"
+    }
+
+    dic_replace = dict((re.escape(k), v) for k, v in dic_replace.items())
+    pattern = re.compile("|".join(dic_replace.keys()))
+    texto = pattern.sub(lambda m: dic_replace[re.escape(m.group(0))], texto)
+    
+    return texto
+
+texto = '{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0 Times New Roman;}}{\\pard Classe 0: Inferior a 0,35\\line '
+		+'Classe 1: 0,35 a 0,69\\line Classe 2: 0,70 a 3,49\\line Classe 3: 3,50 a 17,49 \\line Classe '
+		+'4: 17,50 a 52,49\\line Classe 5: 52,50 a 99,99\\line Classe 6: Superior a 100,00\\par}}'
+
+texto = replace_mult_strings(texto)
+---------------------------------------------------------------------------------------------------------------------
+RTF to Text
+
+import re
+
+def striprtf(text):
+   pattern = re.compile(r"\\([a-z]{1,32})(-?\d{1,10})?[ ]?|\\'([0-9a-f]{2})|\\([^a-z])|([{}])|[\r\n]+|(.)", re.I)
+   # control words which specify a "destionation".
+   destinations = frozenset((
+      'aftncn','aftnsep','aftnsepc','annotation','atnauthor','atndate','atnicn','atnid',
+      'atnparent','atnref','atntime','atrfend','atrfstart','author','background',
+      'bkmkend','bkmkstart','blipuid','buptim','category','colorschememapping',
+      'colortbl','comment','company','creatim','datafield','datastore','defchp','defpap',
+      'do','doccomm','docvar','dptxbxtext','ebcend','ebcstart','factoidname','falt',
+      'fchars','ffdeftext','ffentrymcr','ffexitmcr','ffformat','ffhelptext','ffl',
+      'ffname','ffstattext','field','file','filetbl','fldinst','fldrslt','fldtype',
+      'fname','fontemb','fontfile','fonttbl','footer','footerf','footerl','footerr',
+      'footnote','formfield','ftncn','ftnsep','ftnsepc','g','generator','gridtbl',
+      'header','headerf','headerl','headerr','hl','hlfr','hlinkbase','hlloc','hlsrc',
+      'hsv','htmltag','info','keycode','keywords','latentstyles','lchars','levelnumbers',
+      'leveltext','lfolevel','linkval','list','listlevel','listname','listoverride',
+      'listoverridetable','listpicture','liststylename','listtable','listtext',
+      'lsdlockedexcept','macc','maccPr','mailmerge','maln','malnScr','manager','margPr',
+      'mbar','mbarPr','mbaseJc','mbegChr','mborderBox','mborderBoxPr','mbox','mboxPr',
+      'mchr','mcount','mctrlPr','md','mdeg','mdegHide','mden','mdiff','mdPr','me',
+      'mendChr','meqArr','meqArrPr','mf','mfName','mfPr','mfunc','mfuncPr','mgroupChr',
+      'mgroupChrPr','mgrow','mhideBot','mhideLeft','mhideRight','mhideTop','mhtmltag',
+      'mlim','mlimloc','mlimlow','mlimlowPr','mlimupp','mlimuppPr','mm','mmaddfieldname',
+      'mmath','mmathPict','mmathPr','mmaxdist','mmc','mmcJc','mmconnectstr',
+      'mmconnectstrdata','mmcPr','mmcs','mmdatasource','mmheadersource','mmmailsubject',
+      'mmodso','mmodsofilter','mmodsofldmpdata','mmodsomappedname','mmodsoname',
+      'mmodsorecipdata','mmodsosort','mmodsosrc','mmodsotable','mmodsoudl',
+      'mmodsoudldata','mmodsouniquetag','mmPr','mmquery','mmr','mnary','mnaryPr',
+      'mnoBreak','mnum','mobjDist','moMath','moMathPara','moMathParaPr','mopEmu',
+      'mphant','mphantPr','mplcHide','mpos','mr','mrad','mradPr','mrPr','msepChr',
+      'mshow','mshp','msPre','msPrePr','msSub','msSubPr','msSubSup','msSubSupPr','msSup',
+      'msSupPr','mstrikeBLTR','mstrikeH','mstrikeTLBR','mstrikeV','msub','msubHide',
+      'msup','msupHide','mtransp','mtype','mvertJc','mvfmf','mvfml','mvtof','mvtol',
+      'mzeroAsc','mzeroDesc','mzeroWid','nesttableprops','nextfile','nonesttables',
+      'objalias','objclass','objdata','object','objname','objsect','objtime','oldcprops',
+      'oldpprops','oldsprops','oldtprops','oleclsid','operator','panose','password',
+      'passwordhash','pgp','pgptbl','picprop','pict','pn','pnseclvl','pntext','pntxta',
+      'pntxtb','printim','private','propname','protend','protstart','protusertbl','pxe',
+      'result','revtbl','revtim','rsidtbl','rxe','shp','shpgrp','shpinst',
+      'shppict','shprslt','shptxt','sn','sp','staticval','stylesheet','subject','sv',
+      'svb','tc','template','themedata','title','txe','ud','upr','userprops',
+      'wgrffmtfilter','windowcaption','writereservation','writereservhash','xe','xform',
+      'xmlattrname','xmlattrvalue','xmlclose','xmlname','xmlnstbl',
+      'xmlopen',
+   ))
+   # Translation of some special characters.
+   specialchars = {
+      'par': '\n',
+      'sect': '\n\n',
+      'page': '\n\n',
+      'line': '\n',
+      'tab': '\t',
+      'emdash': u'\u2014',
+      'endash': u'\u2013',
+      'emspace': u'\u2003',
+      'enspace': u'\u2002',
+      'qmspace': u'\u2005',
+      'bullet': u'\u2022',
+      'lquote': u'\u2018',
+      'rquote': u'\u2019',
+      'ldblquote': u'\201C',
+      'rdblquote': u'\u201D', 
+   }
+   stack = []
+   ignorable = False       # Whether this group (and all inside it) are "ignorable".
+   ucskip = 1              # Number of ASCII characters to skip after a unicode character.
+   curskip = 0             # Number of ASCII characters left to skip
+   out = []                # Output buffer.
+   for match in pattern.finditer(text):
+      word,arg,hex,char,brace,tchar = match.groups()
+      if brace:
+         curskip = 0
+         if brace == '{':
+            # Push state
+            stack.append((ucskip,ignorable))
+         elif brace == '}':
+            # Pop state
+            ucskip,ignorable = stack.pop()
+      elif char: # \x (not a letter)
+         curskip = 0
+         if char == '~':
+            if not ignorable:
+                out.append(u'\xA0')
+         elif char in '{}\\':
+            if not ignorable:
+               out.append(char)
+         elif char == '*':
+            ignorable = True
+      elif word: # \foo
+         curskip = 0
+         if word in destinations:
+            ignorable = True
+         elif ignorable:
+            pass
+         elif word in specialchars:
+            out.append(specialchars[word])
+         elif word == 'uc':
+            ucskip = int(arg)
+         elif word == 'u':
+            c = int(arg)
+            if c < 0: c += 0x10000
+            if c > 127: out.append(chr(c))
+            else: out.append(chr(c))
+            curskip = ucskip
+      elif hex: # \'xx
+         if curskip > 0:
+            curskip -= 1
+         elif not ignorable:
+            c = int(hex,16)
+            if c > 127: out.append(chr(c))
+            else: out.append(chr(c))
+      elif tchar:
+         if curskip > 0:
+            curskip -= 1
+         elif not ignorable:
+            out.append(tchar)
+   return ''.join(out)
+
+
+texto = '{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0 Times New Roman;}}{\\pard Classe 0: Inferior a 0,35\\line '
+		+'Classe 1: 0,35 a 0,69\\line Classe 2: 0,70 a 3,49\\line Classe 3: 3,50 a 17,49 \\line Classe '
+		+'4: 17,50 a 52,49\\line Classe 5: 52,50 a 99,99\\line Classe 6: Superior a 100,00\\par}}'
+texto = striprtf(texto)
+print(texto)
+---------------------------------------------------------------------------------------------------------------------
+Assinatura - GSMarcos
+
+http://smatende.gsmarcos.com.br/smassinatura/
+---------------------------------------------------------------------------------------------------------------------
+Conexão ODBC Python - Windows
+
+import pyodbc
+
+cnxn = pyodbc.connect('DSN=IrisLSM')
+
+cur = cnxn.cursor()
+
+l = cur.execute('SELECT RTL.ResultadoParametro FROM ResultadoLocal RTL WHERE RTL.NumeroAtendimento='32'')fetchall()
+
+Link doc PYODBC
+https://github.com/mkleehammer/pyodbc/wiki/Getting-started
+---------------------------------------------------------------------------------------------------------------------
+Conexão ODBC Python - Linux
+
+import turbodbc
+
+cnxn = turbodbc.connect('MXDiag')
+
+cursor = cnxn.cursor()
+
+l = cursor.execute("SELECT RTL.ResultadoParametro FROM ResultadoLocal RTL WHERE RTL.NumeroAtendimento='32'").fetchall()
+
+l = cursor.execute('')
+
+colunas = [coluna[0].lower()
+                       for coluna in cursor.description]
+					   
+r = [dict(zip(colunas)) for linha in self._cursor.fetchall()]
+
+cur.close()
+cnxn.close()
+
+---------------------------------------------------------------------------------------------------------------------
+Comandos GIT
+
+Cancelar commit
+git reset HEAD~1
+---------------------------------------------------------------------------------------------------------------------
+Endereços API's Python
+
+API's Produção:
+	Externo:
+		186.248.152.162
+		http://smconecta.saomarcoslaboratorio.com.br:8083
+	
+	Interno:
+		192.168.100.218
+
+API's Homologação:
+	Externo:
+		186.248.152.165
+		http://smconectahomol.gsmarcos.com.br:8084
+	
+	Interno:
+		192.168.100.191
+
+---------------------------------------------------------------------------------------------------------------------
+Django
+Variáveis:
+	{{ meu_dicionario.chave }}
+	{{ meu_objeto.atributo }}
+	{{ meu_objeto.metodo }}
+	{{ minha_list.0 }}
+
+Tags:
+	{%tag%} Conteúdo {%endtag%}
+	{%tag param1 param2%} Conteúdo {%endtag%}
+	{%tag param1 param2%}
+
+Filtros:
+	{{ variavel|lower }}
+	{{ varial|default:"padrão" }}
+	{{ variavel|random|lower }}
+	
+Para incluir a aplicação no projeto, é necessário adicionar a referência à classe de configuração da 
+aplicação na definição do installed_apps. 
+
+Após isso é necessário rodar o comando - manage.py makemigrations polls
+
+Esse comando indica que você fez algumas mudanças em seus modelos e que você gostaria que as alterações 
+sejam armezenadas como uma migração.
+As migrações são como o django armazena as alterações nos seus modelos
+
+manage.py sqlmigrate polls 0001
+
+Agora rodar o migrate novamente para criar essa tabelas dos modelos no seu banco de dados
+manage.py migrate
+---------------------------------------------------------------------------------------------------------------------
+Github
+git add *
+git commit -m ""
+git commit -am ""
+git push -u origin master
