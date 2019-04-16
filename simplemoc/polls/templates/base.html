@@ -1,7 +1,6 @@
 <!doctype html>
 {% load static %}
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,25 +9,29 @@
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 </head>
-
 <body>
-    <div class="header">
-        <div class="pure-menu pure-menu-open pure-menu-fixed pure-menu-horizontal">
-            <a class="pure-menu-heading" href="{% url 'polls:home' %}">SIMPLE MOOC</a>
-            <ul>
-                <li class="pure-menu-selected"><a href="{% url 'polls:home' %}">Início</a></li>
-                <li><a href="{% url 'courses:index' %}">Cursos</a></li>
-                <li><a href="{% url 'polls:contato' %}">Contato</a></li>
-            </ul>
-        </div>
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading" href="{% url 'polls:home' %}">SIMPLE MOOC</a>
+        <ul>
+            <li class="pure-menu-selected"><a href="{% url 'polls:home' %}">Início</a></li>
+            <li><a href="{% url 'courses:index' %}">Cursos</a></li>
+            <li><a href="{% url 'polls:contato' %}">Contato</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'accounts:dashboard' %}">Painel</a></li>
+            <li><a href="{% url 'accounts:logout' %}">Sair</a></li>
+            {% else %}
+            <li><a href="{% url 'accounts:login' %}">Entrar</a></li>
+            {% endif %}
+        </ul>
     </div>
-    <div class="content">
-        {% block content %}{% endblock %}
-        <div class="footer">
-            Simple Mooc - Uma simples plataforma de ensino a distância
-        </div>
+</div>
+<div class="content">
+    {% block content %}{% endblock %}
+    <div class="footer">
+        Simple MOOC - Uma simples plataforma de ensino a distância
     </div>
-    <script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
+</div>
+<script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
 </body>
-
 </html>

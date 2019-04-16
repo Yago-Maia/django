@@ -1,4 +1,4 @@
----------------------------------------------------------------------------------------------------------------------
+﻿---------------------------------------------------------------------------------------------------------------------
 CLONAR PROJETO - GIT
 
 Entrar no Workspace em Documents
@@ -9,7 +9,7 @@ E criar o ambiente virtual
 	git clone 'url do git'
 	git clone -b 'nome_branch' 'url'
 	cd 'nome do projeto'
-	virtualenv ENV (se for python 2.7, especificar a vers�o)
+	virtualenv ENV (se for python 2.7, especificar a versão)
 	virtualenv -p python2.7 ENV
    virtualenv -p python3.6 ENV
 
@@ -24,24 +24,24 @@ Desativar ambiente ENV
 	ENV\Scripts\deactivate (Windows)
 	source ENV\bin\deactivate (Linux)
 	
-Trocar usu�rio
+Trocar usuário
 	vi server-conf/'nome do projeto'.ini
-	Trocar usu�rio suporte por python
+	Trocar usuário suporte por python
 	
-Ap�s mudar vari�veis de ambiente em:
+Após mudar variáveis de ambiente em:
 	uwsgi/default.ini
 Restartar o sistema
 	sudo service uwsgi restart
 	
-Verificar log ao rodar c�digo no servidor linux
+Verificar log ao rodar código no servidor linux
 sudo less var/log/uwsgi/'nome do projeto'
 shift + g
 ---------------------------------------------------------------------------------------------------------------------
-DICION�RIO E LISTA
+DICIONÁRIO E LISTA
 
 var = {'nome':'Yago', 'segundo_nome':'Maia'}
-var.get('idade', 'Idade n�o informada')
-	'Idade n�o informada'
+var.get('idade', 'Idade não informada')
+	'Idade não informada'
 
 def imprime_nome(nome, segundo_nome):
 	print(nome + ' ' + segundo_nome)
@@ -60,11 +60,11 @@ def imprime_nome4(nome, sobrenome, repeticoes=1):
 		print(nome+' '+sobrenome)	
 
 def imprime_nome5(nome, sobrenome, idade=None, repeticoes=1):
-	desc_idade = idade if idade is not None else 'Idade n�o informada'
+	desc_idade = idade if idade is not None else 'Idade não informada'
 	for repeticao in range(repeticoes):
 		print('{nome} {sobrenome}, {idade}'.format(nome=nome, sobrenome=sobrenome, idade=desc_idade))
 ---------------------------------------------------------------------------------------------------------------------
-REPLACE M�LTIPLAS STRINGS
+REPLACE MÚLTIPLAS STRINGS
 
 import re
 
@@ -220,7 +220,7 @@ Assinatura - GSMarcos
 
 http://smatende.gsmarcos.com.br/smassinatura/
 ---------------------------------------------------------------------------------------------------------------------
-Conex�o ODBC Python - Windows
+Conexão ODBC Python - Windows
 
 import pyodbc
 
@@ -233,7 +233,7 @@ l = cur.execute('SELECT RTL.ResultadoParametro FROM ResultadoLocal RTL WHERE RTL
 Link doc PYODBC
 https://github.com/mkleehammer/pyodbc/wiki/Getting-started
 ---------------------------------------------------------------------------------------------------------------------
-Conex�o ODBC Python - Linux
+Conexão ODBC Python - Linux
 
 import turbodbc
 
@@ -259,7 +259,7 @@ Comandos GIT
 Cancelar commit
 git reset HEAD~1
 ---------------------------------------------------------------------------------------------------------------------
-Endere�os API's Python
+Endereços API's Python
 
 API's Produção:
 	Externo:
@@ -269,7 +269,7 @@ API's Produção:
 	Interno:
 		192.168.100.218
 
-API's Homologa��o:
+API's Homologação:
 	Externo:
 		186.248.152.165
 		http://smconectahomol.gsmarcos.com.br:8084
@@ -279,30 +279,30 @@ API's Homologa��o:
 
 ---------------------------------------------------------------------------------------------------------------------
 Django
-Vari�veis:
+variáveis:
 	{{ meu_dicionario.chave }}
 	{{ meu_objeto.atributo }}
 	{{ meu_objeto.metodo }}
 	{{ minha_list.0 }}
 
 Tags:
-	{%tag%} Conte�do {%endtag%}
-	{%tag param1 param2%} Conte�do {%endtag%}
+	{%tag%} Conteúdo {%endtag%}
+	{%tag param1 param2%} Conteúdo {%endtag%}
 	{%tag param1 param2%}
 
 Filtros:
 	{{ variavel|lower }}
-	{{ varial|default:"padr�o" }}
+	{{ varial|default:"padrão" }}
 	{{ variavel|random|lower }}
 	
-Para incluir a aplica��o no projeto, � necess�rio adicionar a refer�ncia � classe de configura��o da 
-aplica��o na defini��o do installed_apps. 
+Para incluir a aplicação no projeto, é necessário adicionar a referência à classe de configuração da 
+aplicação na definição do installed_apps. 
 
-Ap�s isso � necess�rio rodar o comando - manage.py makemigrations polls
+Após isso é necessário rodar o comando - manage.py makemigrations polls
 
-Esse comando indica que voc� fez algumas mudan�as em seus modelos e que voc� gostaria que as altera��es 
-sejam armezenadas como uma migra��o.
-As migra��es s�o como o django armazena as altera��es nos seus modelos
+Esse comando indica que você fez algumas mudanças em seus modelos e que você gostaria que as alterações 
+sejam armezenadas como uma migração.
+As migrações são como o django armazena as alterações nos seus modelos
 
 manage.py sqlmigrate polls 0001
 
