@@ -308,6 +308,9 @@ manage.py sqlmigrate polls 0001
 
 Agora rodar o migrate novamente para criar essa tabelas dos modelos no seu banco de dados
 manage.py migrate
+
+Criar super usuário
+manage.py createsuperuser
 --------------------------------------------------------------------------------------------------------------------------
 Github
 git add *
