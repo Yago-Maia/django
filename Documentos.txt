@@ -317,3 +317,13 @@ git add *
 git commit -m ""
 git commit -am ""
 git push -u origin master
+--------------------------------------------------------------------------------------------------------------------------
+Configurar Django
+pip install pylint-django
+
+Adicionar o código:
+{"python.linting.pylintArgs": [
+     "--load-plugins=pylint_django"
+],}
+
+Em: Ctrl + sft + P > Preferences: Configure Language Specific Settings > Python

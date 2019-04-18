@@ -13,7 +13,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         'Nome de Usuário',
         max_length=30,
         unique=True,
-        validators=[validators.RegexValidator(re.compile('^[\w.@+-]+$'),
+        validators=[validators.RegexValidator(re.compile('^[\\w.@+-]+$'),
             'O nome de usuário só pode conter letras, digitos ou os seguintes '
             'caracteres: @/./+/-/_', 'invalid')]
     )
